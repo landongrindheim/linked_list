@@ -126,98 +126,6 @@ RSpec.describe LinkedList do
     end
   end
 
-  describe "#insert_at" do
-    context "when the index argument is within the bounds of the list" do
-      it "inserts the value at the given index in a copy of the list" do
-        list = LinkedList.new(0)
-        (1..5).each { |n| list = list.prepend(n) }
-
-        expect(list.value_at(3)).to eq(2)
-
-        list_with_new_value = list.insert_at(3, "new value")
-
-        expect(list_with_new_value.length).to eq(list.length + 1)
-        expect(list_with_new_value.value_at(3)).to eq("new value")
-      end
-    end
-
-    context "when the index argument is outside the bounds of the list" do
-      it "appends the value at the end of the list" do
-        list = LinkedList.new(0)
-        (1..5).each { |n| list = list.prepend(n) }
-
-        expect(list.last).to eq(0)
-
-        list_with_new_value = list.insert_at(9, "new value")
-
-        expect(list_with_new_value.length).to eq(list.length + 1)
-        expect(list_with_new_value.last).to eq("new value")
-      end
-    end
-  end
-
-  describe "#insert_before" do
-    context "when the index argument is within the bounds of the list" do
-      it "inserts the value directly before the index in a copy of the list" do
-        list = LinkedList.new(0)
-        (1..5).each { |n| list = list.prepend(n) }
-        index = 3
-
-        expect(list.value_at(index)).to eq(2)
-
-        list_with_new_value = list.insert_before(index + 1, "new value")
-
-        expect(list_with_new_value.length).to eq(list.length + 1)
-        expect(list_with_new_value.value_at(index)).to eq("new value")
-      end
-    end
-
-    context "when the index argument is outside the bounds of the list" do
-      it "appends the value at the end of the list" do
-        list = LinkedList.new(0)
-        (1..5).each { |n| list = list.prepend(n) }
-
-        expect(list.last).to eq(0)
-
-        list_with_new_value = list.insert_before(9, "new value")
-
-        expect(list_with_new_value.length).to eq(list.length + 1)
-        expect(list_with_new_value.last).to eq("new value")
-      end
-    end
-  end
-
-  describe "#insert_before" do
-    context "when the index argument is within the bounds of the list" do
-      it "inserts the value directly before the index in a copy of the list" do
-        list = LinkedList.new(0)
-        (1..5).each { |n| list = list.prepend(n) }
-        index = 3
-
-        expect(list.value_at(index)).to eq(2)
-
-        list_with_new_value = list.insert_after(index - 1, "new value")
-
-        expect(list_with_new_value.length).to eq(list.length + 1)
-        expect(list_with_new_value.value_at(index)).to eq("new value")
-      end
-    end
-
-    context "when the index argument is outside the bounds of the list" do
-      it "appends the value at the end of the list" do
-        list = LinkedList.new(0)
-        (1..5).each { |n| list = list.prepend(n) }
-
-        expect(list.last).to eq(0)
-
-        list_with_new_value = list.insert_after(9, "new value")
-
-        expect(list_with_new_value.length).to eq(list.length + 1)
-        expect(list_with_new_value.last).to eq("new value")
-      end
-    end
-  end
-
   describe "#delete" do
     context "when a list contains an element matching the argument" do
       it "removes first the element matching the argument" do
@@ -238,33 +146,6 @@ RSpec.describe LinkedList do
         expect(list_without_five.contains?(5)).to eq(false)
 
         expect(list_without_five.delete(5)).to eq(list_without_five)
-      end
-    end
-  end
-
-  describe "#delete_at" do
-    context "when the argument is within the bounds of the list" do
-      it "removes the element from a copy of the list and returns that copy" do
-        list = LinkedList.new("even")
-        (1..5).each { |n| list = list.prepend(n.even? ? "even" : "odd") }
-
-        expect(list.length).to eq(6)
-        expect(list.value_at(2)).to eq("odd")
-
-        pruned_list = list.delete_at(2)
-
-        expect(pruned_list.length).to eq(5)
-        expect(pruned_list.value_at(2)).to eq("even")
-      end
-    end
-
-    context "when the argument is outside the bounds of the list" do
-      it "returns the list" do
-        list = LinkedList.new("even")
-        (1..5).each { |n| list = list.prepend(n.even? ? "even" : "odd") }
-
-        expect(list.length).to eq(6)
-        expect(list.delete_at(7)).to eq(list)
       end
     end
   end

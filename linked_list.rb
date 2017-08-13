@@ -66,33 +66,6 @@ class LinkedList
     list.peek
   end
 
-  def insert_at(index, object)
-    return prepend(object) unless index.positive?
-    return append(object) if index > length
-
-    list = self
-    traversed_elements = LinkedList.new(list.peek)
-    (index).times do
-      list = list.next
-      traversed_elements = traversed_elements.prepend(list.peek)
-    end
-
-    list = list.prepend(object)
-    while traversed_elements.next?
-      traversed_elements = traversed_elements.next
-      list = list.prepend(traversed_elements.peek)
-    end
-    list
-  end
-
-  def insert_before(index, object)
-    insert_at(index - 1, object)
-  end
-
-  def insert_after(index, object)
-    insert_at(index + 1, object)
-  end
-
   def add_all(enumerable)
     enumerable.reverse_each.inject(self) { |list, item| list = list.push(item) }
   end
@@ -119,29 +92,6 @@ class LinkedList
 
       traversed_elements = traversed_elements.prepend(list.peek)
     end
-
-    while traversed_elements.next?
-      traversed_elements = traversed_elements.next
-      list = list.prepend(traversed_elements.peek)
-    end
-
-    list
-  end
-
-  def delete_at(index)
-    return pop if index.zero?
-    return reverse.pop.reverse if index == (length - 1)
-    return self if index.negative? || index >= length
-
-    list = self
-    traversed_elements = LinkedList.new(list.peek)
-
-    (index).times do
-      list = list.next
-      traversed_elements = traversed_elements.prepend(list.peek)
-    end
-
-    list = list.next
 
     while traversed_elements.next?
       traversed_elements = traversed_elements.next
