@@ -21,7 +21,7 @@ decoupling the method from the mixin is the next step to take here.
 * `#contains?`
 * `#length`
 * `#reverse`
-* `#each`   -> `{ and_with_it: *Enumerable.methods }`
+* `#each`   -> `{ and_with_it: Enumerable.instance_methods }`
 * `#to_s`
 
 
